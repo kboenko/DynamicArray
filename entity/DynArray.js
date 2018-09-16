@@ -8,14 +8,16 @@ class DynArray {
 
   makeArray(capacity) {
 
+    //creating absolutely new array
     if (!Object.keys(this.array).length || Object.keys(this.array).length === 0) {
       for (let i = 0; i < this.capacity ; i++) {
         this.array[i] = null;
       }
-    } else {
-      let currentCapacity = Object.keys(this.array).length;
 
-      for (let i = currentCapacity - 1; i < capacity; i++) {
+    //increasing size of existing array
+    } else if (this.capacity < capacity){
+
+      for (let i = this.capacity - 1; i < capacity; i++) {
         this.array[i] = null;
       }
 
@@ -27,7 +29,7 @@ class DynArray {
   getItem(index) {
 
     if (!this.array[index] || index > this.count - 1) {
-      throw new Error('Index out of range');
+      throw new Error(`Index ${index} is out of range`);
     } else {
       return this.array[index];
     }
@@ -50,8 +52,8 @@ class DynArray {
     }
 
     if (this.count === this.capacity) {
-      this.capacity = ((this.capacity * 3) / 2 ) + 1;
-      this.makeArray(this.capacity);
+      let newCapacity = ((this.capacity * 3) / 2 ) + 1;
+      this.makeArray(newCapacity);
       this.append(item);
       this.count--;
     }
@@ -59,9 +61,41 @@ class DynArray {
 
   insertItem(index, item) {
 
+    if (this.getItem(index)) {
+
+      if (this.count + 1 === this.capacity) {
+        this.capacity = ((this.capacity * 3) / 2 ) + 1;
+        this.makeArray(this.capacity);
+      }
+
+      for (let i = this.count - 1; i > index-1; i--) {
+        this.array[i+1] = this.array[i];
+      }
+
+      this.array[index] = item;
+      this.count++;
+    }
   }
 
   deleteItem(index) {
+
+    if (this.getItem(index)) {
+      for (let i = index +1; i< this.count + 1; i++) {
+        this.array[i-1] = this.array[i];
+      }
+
+      this.count--;
+    }
+
+    if (this.capacity / this.count > 2 && this.capacity / 2 > 16) {
+
+      for (let i = Object.keys(this.array).length / 2; i < this.capacity ; i ++) {
+        console.log(i);
+        delete (this.array[Math.floor(i)]);
+      }
+
+      this.capacity = Math.floor(this.capacity / 2);
+    }
 
   }
 

@@ -18,6 +18,28 @@ const DynArray = require('./entity/DynArray');
 
   console.log(da);
 
+  da.insertItem(3, 42);
+
+  console.log(da);
+
+  da.deleteItem(10);
+
+  console.log(da);
+
+  da.deleteItem(10);
+  da.deleteItem(10);
+  da.deleteItem(10);
+  da.deleteItem(10);
+
+  console.log('88888888888888888888888888');
+  console.log(da);
+  da.deleteItem(10);
+  //da.deleteItem(10);
+  //da.deleteItem(10);
+
+
+  console.log(da);
+
   /*da.makeArray(25);
 
   console.log(da);*/
