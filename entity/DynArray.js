@@ -15,20 +15,30 @@ class DynArray {
       }
 
     //increasing size of existing array
-    } else if (this.capacity < capacity){
+    } else if (this.capacity = capacity){
 
-      for (let i = this.capacity - 1; i < capacity; i++) {
+      for (let i = this.count; i < capacity; i++) {
         this.array[i] = null;
       }
 
       this.capacity = capacity;
     }
 
+    if (this.capacity / this.count > 2 && this.capacity / 2 > 16) {
+
+      for (let i = Object.keys(this.array).length / 2; i < this.capacity ; i ++) {
+        console.log(i);
+        delete (this.array[Math.floor(i)]);
+      }
+
+      this.capacity = Math.floor(this.capacity / 2);
+    }
+
   }
 
   getItem(index) {
 
-    if (!this.array[index] || index > this.count - 1) {
+    if (index <= 0 || index > this.count) {
       throw new Error(`Index ${index} is out of range`);
     } else {
       return this.array[index];
@@ -36,7 +46,7 @@ class DynArray {
 
   }
 
-  append(item) {
+  /*append(item) {
 
     if (Object.keys(this.array).length > 0) {
 
@@ -57,12 +67,15 @@ class DynArray {
       this.append(item);
       this.count--;
     }
+  }*/
+
+  append(item) {
+    this.insertItem(this.count, item)
   }
 
   insertItem(index, item) {
 
     if (this.getItem(index)) {
-
       if (this.count + 1 === this.capacity) {
         this.capacity = ((this.capacity * 3) / 2 ) + 1;
         this.makeArray(this.capacity);
@@ -85,16 +98,6 @@ class DynArray {
       }
 
       this.count--;
-    }
-
-    if (this.capacity / this.count > 2 && this.capacity / 2 > 16) {
-
-      for (let i = Object.keys(this.array).length / 2; i < this.capacity ; i ++) {
-        console.log(i);
-        delete (this.array[Math.floor(i)]);
-      }
-
-      this.capacity = Math.floor(this.capacity / 2);
     }
 
   }
