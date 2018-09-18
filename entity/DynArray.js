@@ -24,6 +24,7 @@ class DynArray {
       this.capacity = capacity;
     }
 
+    //check capacity and decrease it (if it needs)
     if (this.capacity / this.count > 2 && this.capacity / 2 > 16) {
 
       for (let i = Object.keys(this.array).length / 2; i < this.capacity ; i ++) {
