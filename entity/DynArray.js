@@ -100,6 +100,8 @@ class DynArray {
       this.count--;
     }
 
+    this.makeArray(capacity);
+
   }
 
 
