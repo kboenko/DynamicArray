@@ -10,6 +10,6 @@
   "author": "ka.boenko",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^1.18.4"
+    "nodemon": "^1.5.0"
   }
 }
